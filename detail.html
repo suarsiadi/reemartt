@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk - Jaket Harrington Vintage | ReeMart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Ree<span>Mart</span></a>
+            <div class="search-box">
+                <input type="text" placeholder="Cari jaket thrift, iPhone bekas, buku kuliah...">
+                <button type="button">Cari</button>
+            </div>
+            <div class="nav-actions">
+                <a href="jual.html" class="btn-sell">+ Jual Barang</a>
+                <a href="#" class="nav-icon">Keranjang (2)</a>
+                <a href="#" class="nav-icon">Akun Saya</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="container breadcrumb">
+        <a href="index.html">Beranda</a> &rsaquo; <a href="#">Fashion & Thrift</a> &rsaquo; <span>Jaket Harrington Vintage Uniqlo</span>
+    </div>
+
+    <!-- KONTEN DETAIL PRODUK -->
+    <main class="container detail-wrapper">
+        <!-- Kolom Kiri: Foto Barang -->
+        <div class="detail-gallery">
+            <div class="main-photo">
+                <span class="badge like-new">Like New 9.5/10</span>
+                <img src="https://placehold.co/450x450/e2e8f0/1e293b?text=Foto+Utama+Jaket" alt="Jaket Utama">
+            </div>
+            <div class="thumb-list">
+                <img src="https://placehold.co/100x100/e2e8f0/1e293b?text=Tampak+Depan" alt="Thumb 1" class="active-thumb">
+                <img src="https://placehold.co/100x100/e2e8f0/1e293b?text=Tag+Size" alt="Thumb 2">
+                <img src="https://placehold.co/100x100/fef3c7/b45309?text=Detail+Minus" alt="Thumb 3">
+            </div>
+        </div>
+
+        <!-- Kolom Tengah: Informasi & Kondisi Preloved -->
+        <div class="detail-info">
+            <h1 class="detail-title">Jaket Harrington Vintage Uniqlo Size L (Warna Navy)</h1>
+            <div class="detail-meta">
+                <span>Terjual 0 (Stok Tunggal)</span> &bull; <span>Dilihat 42 kali</span>
+            </div>
+
+            <div class="detail-price-box">
+                <span class="detail-price" id="display-price">Rp145.000</span>
+                <span class="nego-badge" id="nego-status">Bisa Nego</span>
+            </div>
+
+            <!-- Kotak Transparansi Preloved -->
+            <div class="condition-box">
+                <h3>📋 Laporan Kondisi Barang (Preloved Check)</h3>
+                <ul>
+                    <li><strong>Skor Kondisi:</strong> 9.5 / 10 (Like New)</li>
+                    <li><strong>Lama Pemakaian:</strong> ± 4 bulan (jarang dipakai)</li>
+                    <li><strong>Kelengkapan:</strong> Unit jaket saja (sudah dicuci laundry)</li>
+                </ul>
+                <div class="minus-alert">
+                    <strong>⚠️ Catatan Minus:</strong> Kancing pada bagian pergelangan lengan kiri sedikit kendor, tapi masih menempel kuat dan mudah dijahit ulang. Tidak ada robek atau noda membandel.
+                </div>
+            </div>
+
+            <!-- Info Penjual -->
+            <div class="seller-card">
+                <div class="seller-avatar">RA</div>
+                <div class="seller-meta">
+                    <h4>Rizky Thrift Store <span class="verified-tag">✓ Terverifikasi</span></h4>
+                    <p>📍 Kota Pangkalpinang &bull; ⭐ 4.9 (28 Ulasan)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolom Kanan: Aksi Nego & Beli (Escrow) -->
+        <div class="detail-action-card">
+            <h3>Atur Pembelian</h3>
+            <p class="stock-info">Stok tersedia: <strong>1 unit</strong> (Barang Preloved)</p>
+
+            <!-- Fitur Nego Harga Interaktif -->
+            <div class="nego-section">
+                <label for="input-nego">Ajukan Harga Tawar (Rp):</label>
+                <div class="nego-input-group">
+                    <input type="number" id="input-nego" placeholder="Contoh: 125000">
+                    <button type="button" onclick="ajukanNego()">Tawar</button>
+                </div>
+                <small id="nego-feedback" class="nego-feedback"></small>
+            </div>
+
+            <div class="action-buttons">
+                <a href="checkout.html" class="btn-buy-now">Beli Sekarang</a>
+                <button type="button" class="btn-add-cart">+ Keranjang</button>
+            </div>
+
+            <div class="escrow-guarantee">
+                <strong>🛡️ Jaminan ReeMart Escrow:</strong>
+                <p>Uang Anda ditahan sistem dan baru diteruskan ke penjual setelah Anda mengonfirmasi barang sesuai deskripsi.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCRIPT INTERAKTIF SIMULASI NEGO -->
+    <script>
+        function ajukanNego() {
+            const input = document.getElementById('input-nego').value;
+            const feedback = document.getElementById('nego-feedback');
+            const displayPrice = document.getElementById('display-price');
+            const negoStatus = document.getElementById('nego-status');
+
+            if (!input || input <= 0) {
+                feedback.style.color = '#dc2626';
+                feedback.textContent = 'Masukkan nominal tawaran terlebih dahulu.';
+                return;
+            }
+
+            if (input < 110000) {
+                feedback.style.color = '#d97706';
+                feedback.textContent = 'Tawaran terlalu rendah! Penjual menolak (Min. Rp110.000).';
+            } else {
+                feedback.style.color = '#059669';
+                feedback.textContent = 'Tawaran disetujui penjual! Harga otomatis diperbarui.';
+                displayPrice.textContent = 'Rp' + parseInt(input).toLocaleString('id-ID');
+                negoStatus.textContent = 'Harga Deal Nego';
+                negoStatus.style.background = '#059669';
+                negoStatus.style.color = '#fff';
+            }
+        }
+    </script>
+
+</body>
+</html>

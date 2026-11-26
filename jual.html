@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jual Barang Preloved | ReeMart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Ree<span>Mart</span></a>
+            <span style="color: #1e3a8a; font-weight: 700; font-size: 16px;">Pusat Penjual - Tambah Produk Preloved</span>
+            <a href="index.html" class="nav-icon">&larr; Kembali ke Beranda</a>
+        </div>
+    </header>
+
+    <main class="container sell-container">
+        <div class="checkout-card">
+            <h2>📤 Unggah Barang Preloved Baru</h2>
+            <p class="form-subtitle">Pastikan deskripsi kondisi dan minus diisi secara jujur untuk menghindari komplain retur.</p>
+
+            <form onsubmit="simpanProduk(event)">
+                <div class="form-group">
+                    <label>Nama Produk *</label>
+                    <input type="text" class="form-control" placeholder="Contoh: Sepatu Converse Chuck Taylor 70s Hitam Size 42" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kategori *</label>
+                        <select class="form-control" required>
+                            <option value="">-- Pilih Kategori --</option>
+                            <option>Fashion & Thrifting</option>
+                            <option>Gadget & Elektronik</option>
+                            <option>Buku & Perlengkapan Kuliah</option>
+                            <option>Perabotan Kamar & Kos</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Harga Jual (Rp) *</label>
+                        <input type="number" class="form-control" placeholder="Contoh: 250000" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tingkat Kondisi *</label>
+                        <select class="form-control" required>
+                            <option>Like New (95% - 99%)</option>
+                            <option>Good (80% - 94%)</option>
+                            <option>Fair (70% - 79% / Minus Pemakaian)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Skor Kondisi (1 - 10) *</label>
+                        <input type="number" min="1" max="10" step="0.5" class="form-control" placeholder="Contoh: 8.5" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Catatan Minus / Cacat Barang (Wajib Diisi) *</label>
+                    <textarea class="form-control" rows="3" placeholder="Jelaskan secara jujur jika ada lecet, noda, kotak hilang, atau tulis 'Tidak ada minus' jika mulus." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Unggah Foto Asli Barang (Real Pict) *</label>
+                    <input type="file" class="form-control" accept="image/*">
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="agree-terms" required>
+                    <label for="agree-terms">Saya menyatakan foto yang diunggah adalah kondisi fisik barang saat ini, dan menyetujui potongan biaya admin penjual sebesar 4% saat dana cair.</label>
+                </div>
+
+                <button type="submit" class="btn-pay-now">Terbitkan Produk ke Katalog</button>
+            </form>
+
+            <div id="upload-success" class="success-box" style="display: none;">
+                🎉 <strong>Produk Berhasil Diterbitkan!</strong> Barang Anda sekarang sudah tampil di halaman utama ReeMart.
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function simpanProduk(e) {
+            e.preventDefault();
+            document.getElementById('upload-success').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

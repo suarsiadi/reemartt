@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout & Pembayaran Escrow | ReeMart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR SEDERHANA -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Ree<span>Mart</span></a>
+            <span style="color: #1e3a8a; font-weight: 700; font-size: 16px;">Checkout Aman (Rekening Bersama)</span>
+            <a href="detail.html" class="nav-icon">&larr; Kembali ke Produk</a>
+        </div>
+    </header>
+
+    <main class="container checkout-wrapper">
+        <!-- KOLOM KIRI: ALAMAT, PRODUK, PENGIRIMAN & PEMBAYARAN -->
+        <div class="checkout-left">
+            <!-- Alamat Pengiriman -->
+            <div class="checkout-card">
+                <h3>📍 Alamat Pengiriman Pembeli</h3>
+                <p class="buyer-name">Suar Siadi (+62 812-3456-7890)</p>
+                <p class="buyer-address">Jl. Kampus Terpadu UBB, Balunijuk, Kec. Merawang, Kab. Bangka, Kepulauan Bangka Belitung</p>
+            </div>
+
+            <!-- Ringkasan Barang Preloved -->
+            <div class="checkout-card">
+                <h3>📦 Barang yang Dibeli</h3>
+                <div class="checkout-item">
+                    <img src="https://placehold.co/80x80/e2e8f0/1e293b?text=Jaket" alt="Jaket">
+                    <div class="item-details">
+                        <h4>Jaket Harrington Vintage Uniqlo Size L (Navy)</h4>
+                        <span class="badge like-new" style="position: static; display: inline-block; margin: 4px 0;">Like New 9.5/10</span>
+                        <p class="item-seller">Penjual: Rizky Thrift Store (Pangkalpinang)</p>
+                    </div>
+                    <div class="item-price">Rp145.000</div>
+                </div>
+            </div>
+
+            <!-- Opsi Pengiriman -->
+            <div class="checkout-card">
+                <h3>🚚 Pilih Metode Pengiriman</h3>
+                <select id="shipping-select" class="form-control" onchange="hitungTotal()">
+                    <option value="0">COD Area Kampus / Ketemu Langsung (Rp0)</option>
+                    <option value="12000" selected>J&T Express Reguler - Estimasi 1-2 Hari (Rp12.000)</option>
+                    <option value="15000">JNE Reguler - Estimasi 1-2 Hari (Rp15.000)</option>
+                    <option value="18000">Kurir Instan Lokal - Tiba Hari Ini (Rp18.000)</option>
+                </select>
+            </div>
+
+            <!-- Metode Pembayaran Escrow -->
+            <div class="checkout-card">
+                <h3>💳 Metode Pembayaran (Escrow ReeMart)</h3>
+                <div class="payment-options">
+                    <label class="pay-option">
+                        <input type="radio" name="payment" checked> QRIS (Dana, GoPay, OVO, ShopeePay, Mobile Banking)
+                    </label>
+                    <label class="pay-option">
+                        <input type="radio" name="payment"> Virtual Account BCA / BRI / Mandiri
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- KOLOM KANAN: RINGKASAN BIAYA & TOMBOL BAYAR -->
+        <div class="checkout-right">
+            <div class="checkout-card summary-card">
+                <h3>Rincian Pembayaran</h3>
+                <div class="summary-row">
+                    <span>Harga Barang Preloved</span>
+                    <span>Rp145.000</span>
+                </div>
+                <div class="summary-row">
+                    <span>Ongkos Kirim</span>
+                    <span id="display-ongkir">Rp12.000</span>
+                </div>
+                <div class="summary-row">
+                    <span>Biaya Layanan Escrow</span>
+                    <span>Rp2.000</span>
+                </div>
+                <hr class="divider">
+                <div class="summary-row total-row">
+                    <span>Total Pembayaran</span>
+                    <span id="display-total">Rp159.000</span>
+                </div>
+
+                <div class="escrow-guarantee" style="margin: 14px 0;">
+                    <strong>🛡️ Perlindungan Pembeli Aktif:</strong>
+                    <p>Dana Anda disimpan aman oleh ReeMart dan hanya dicairkan ke penjual setelah Anda menekan tombol <em>"Pesanan Diterima"</em>.</p>
+                </div>
+
+                <button type="button" class="btn-pay-now" onclick="prosesBayar()">Bayar Sekarang (Escrow)</button>
+                <div id="payment-success" class="success-box" style="display: none;">
+                    ✅ <strong>Pembayaran Berhasil!</strong> Dana Rp<span id="paid-amount"></span> telah diamankan di sistem Escrow ReeMart. Menunggu penjual mengirim barang.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const hargaBarang = 145000;
+        const biayaLayanan = 2000;
+
+        function hitungTotal() {
+            const ongkir = parseInt(document.getElementById('shipping-select').value);
+            const total = hargaBarang + ongkir + biayaLayanan;
+
+            document.getElementById('display-ongkir').textContent = 'Rp' + ongkir.toLocaleString('id-ID');
+            document.getElementById('display-total').textContent = 'Rp' + total.toLocaleString('id-ID');
+        }
+
+        function prosesBayar() {
+            const ongkir = parseInt(document.getElementById('shipping-select').value);
+            const total = hargaBarang + ongkir + biayaLayanan;
+            
+            document.getElementById('paid-amount').textContent = total.toLocaleString('id-ID');
+            document.getElementById('payment-success').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

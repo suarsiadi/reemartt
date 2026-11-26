@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Saya (Pembeli) | ReeMart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Ree<span>Mart</span></a>
+            <div class="role-switcher">
+                <a href="index.html" class="role-link">Katalog</a>
+                <a href="pembeli.html" class="role-link active">Akun Pembeli</a>
+                <a href="penjual.html" class="role-link">Toko Penjual</a>
+                <a href="admin.html" class="role-link">Panel Admin</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container dashboard-container">
+        <div class="dashboard-header">
+            <h2>🛍️ Pesanan Saya (Sisi Pembeli)</h2>
+            <p>Pantau pengiriman barang preloved Anda dan konfirmasi penerimaan untuk mencairkan dana escrow.</p>
+        </div>
+
+        <!-- PESANAN 1: SEDANG DIKIRIM (BISA KONFIRMASI TERIMA / RETUR) -->
+        <div class="order-card">
+            <div class="order-header">
+                <span><strong>INV/20261126/RM-001</strong> &bull; Toko: Rizky Thrift Store</span>
+                <span class="status-badge status-shipped" id="status-order-1">Sedang Dikirim (Resi: JNT88291044)</span>
+            </div>
+            <div class="order-body">
+                <img src="https://placehold.co/80x80/e2e8f0/1e293b?text=Jaket" alt="Jaket">
+                <div class="order-info">
+                    <h4>Jaket Harrington Vintage Uniqlo Size L (Navy)</h4>
+                    <p>Kondisi: Like New 9.5/10 &bull; Total Bayar Escrow: <strong>Rp159.000</strong></p>
+                    <small class="escrow-note">🛡️ Dana Rp145.000 masih ditahan aman oleh ReeMart.</small>
+                </div>
+                <div class="order-actions" id="action-order-1">
+                    <button type="button" class="btn-confirm" onclick="terimaPesanan()">✓ Pesanan Diterima</button>
+                    <button type="button" class="btn-retur" onclick="bukaFormRetur()">⚠️ Ajukan Retur</button>
+                </div>
+            </div>
+
+            <!-- Form Ajukan Retur (Tersembunyi awalnya) -->
+            <div id="retur-box" class="retur-form" style="display: none;">
+                <h4>Form Pengajuan Pengembalian Barang (Mediasi Admin)</h4>
+                <p>Wajib melampirkan alasan ketidaksesuaian kondisi dan bukti video unboxing tanpa jeda.</p>
+                <textarea id="alasan-retur" class="form-control" rows="2" placeholder="Contoh: Ada robek besar di bagian punggung yang tidak disebutkan di deskripsi..."></textarea>
+                <div style="margin-top: 8px; display: flex; gap: 10px; align-items: center;">
+                    <input type="file" accept="video/*">
+                    <button type="button" class="btn-retur-submit" onclick="kirimRetur()">Kirim Bukti ke Admin</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESANAN 2: RIWAYAT SELESAI -->
+        <div class="order-card">
+            <div class="order-header">
+                <span><strong>INV/20261120/RM-089</strong> &bull; Toko: Pustaka Mahasiswa</span>
+                <span class="status-badge status-done">Selesai (Dana Cair ke Penjual)</span>
+            </div>
+            <div class="order-body">
+                <img src="https://placehold.co/80x80/e2e8f0/1e293b?text=Buku" alt="Buku">
+                <div class="order-info">
+                    <h4>Buku Manajemen Risiko & Keuangan (Edisi 4)</h4>
+                    <p>Kondisi: Good 8.5/10 &bull; Total Bayar: <strong>Rp57.000</strong></p>
+                    <small style="color: #059669;">⭐ Anda memberi rating 5/5: "Buku masih bagus, catatan stabilo rapi."</small>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function terimaPesanan() {
+            const status = document.getElementById('status-order-1');
+            const action = document.getElementById('action-order-1');
+            status.textContent = 'Selesai (Dana Diteruskan ke Penjual)';
+            status.className = 'status-badge status-done';
+            action.innerHTML = '<span style="color:#059669; font-weight:700; font-size:13px;">✓ Transaksi Selesai</span>';
+            document.getElementById('retur-box').style.display = 'none';
+            alert('Konfirmasi berhasil! Dana penjualan (dipotong komisi 4%) telah diteruskan ke ReeWallet penjual.');
+        }
+
+        function bukaFormRetur() {
+            document.getElementById('retur-box').style.display = 'block';
+        }
+
+        function kirimRetur() {
+            const alasan = document.getElementById('alasan-retur').value;
+            if (!alasan) {
+                alert('Harap isi alasan ketidaksesuaian barang terlebih dahulu.');
+                return;
+            }
+            const status = document.getElementById('status-order-1');
+            status.textContent = 'Dalam Mediasi Admin (Dana Dibekukan)';
+            status.className = 'status-badge status-dispute';
+            document.getElementById('retur-box').innerHTML = '<p style="color:#b45309; font-weight:600;">⏳ Pengajuan retur terkirim! Tim Admin ReeMart akan meninjau bukti video unboxing Anda dalam 1x24 jam.</p>';
+        }
+    </script>
+
+</body>
+</html>

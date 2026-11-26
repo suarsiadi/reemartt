@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin & Resolusi | ReeMart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Ree<span>Mart</span> <small style="font-size: 12px; font-weight: 400; color: #94a3b8;">ADMIN</small></a>
+            <div class="role-switcher">
+                <a href="index.html" class="role-link">Katalog</a>
+                <a href="pembeli.html" class="role-link">Akun Pembeli</a>
+                <a href="penjual.html" class="role-link">Toko Penjual</a>
+                <a href="admin.html" class="role-link active">Panel Admin</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container dashboard-container">
+        <div class="dashboard-header">
+            <h2>🛡️ Pusat Kontrol Administrator ReeMart</h2>
+            <p>Monitoring kas rekening bersama (escrow), pendapatan komisi platform, dan mediasi sengketa barang preloved.</p>
+        </div>
+
+        <!-- STATISTIK PLATFORM -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">Total Kas Escrow Ditahan</span>
+                <h3 class="stat-value">Rp4.850.000</h3>
+                <small>Dari 24 transaksi aktif berjalan</small>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Pendapatan Komisi & Fee Platform</span>
+                <h3 class="stat-value" style="color: #059669;">Rp612.500</h3>
+                <small>Komisi penjual 4% + Platform fee Rp2.000</small>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Sengketa / Komplain Aktif</span>
+                <h3 class="stat-value" style="color: #dc2626;" id="dispute-count">1 Kasus</h3>
+                <small>Menunggu keputusan mediasi admin</small>
+            </div>
+        </div>
+
+        <!-- PUSAT RESOLUSI SENGKETA (MEDIASI RETUR) -->
+        <div class="checkout-card">
+            <h3>⚖️ Pusat Resolusi Sengketa (Verifikasi Video Unboxing)</h3>
+            <div class="order-card" style="box-shadow: none; border: 1px solid #fecaca; background: #fffafa; margin-top: 12px;">
+                <div class="order-header">
+                    <span><strong>KASUS #DSP-014</strong> &bull; Invoice: INV/20261124/RM-077</span>
+                    <span class="status-badge status-dispute" id="status-dispute-1">Menunggu Keputusan Admin</span>
+                </div>
+                <div class="order-body" style="align-items: flex-start;">
+                    <div class="order-info">
+                        <h4>Produk: Sepatu Running Nike Pegasus 38 Preloved (Rp320.000)</h4>
+                        <p><strong>Pembeli (Andi):</strong> Mengajukan retur karena sol sepatu bagian kanan terlepas saat dibuka (melampirkan video unboxing 45 detik).</p>
+                        <p><strong>Penjual (SecondKicks):</strong> Mengklaim kondisi lem aman sebelum dikirim.</p>
+                        <div style="margin-top: 8px;">
+                            <span class="video-pill">🎥 Bukti_Unboxing_Andi.mp4 (Terverifikasi Valid)</span>
+                        </div>
+                    </div>
+                    <div class="admin-decisions" id="decision-buttons">
+                        <button type="button" class="btn-refund" onclick="putuskanRefund()">Setujui Retur & Refund Pembeli</button>
+                        <button type="button" class="btn-release" onclick="putuskanCair()">Tolak Komplain & Cairkan ke Penjual</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function putuskanRefund() {
+            document.getElementById('status-dispute-1').textContent = 'Diputuskan: Refund Penuh ke Pembeli';
+            document.getElementById('status-dispute-1').className = 'status-badge status-done';
+            document.getElementById('decision-buttons').innerHTML = '<span style="color:#059669; font-weight:700; font-size:13px;">✓ Dana Rp320.000 dikembalikan ke Pembeli</span>';
+            document.getElementById('dispute-count').textContent = '0 Kasus';
+        }
+
+        function putuskanCair() {
+            document.getElementById('status-dispute-1').textContent = 'Diputuskan: Dana Cair ke Penjual';
+            document.getElementById('status-dispute-1').className = 'status-badge status-done';
+            document.getElementById('decision-buttons').innerHTML = '<span style="color:#0284c7; font-weight:700; font-size:13px;">✓ Dana diteruskan ke ReeWallet Penjual</span>';
+            document.getElementById('dispute-count').textContent = '0 Kasus';
+        }
+    </script>
+
+</body>
+</html>
