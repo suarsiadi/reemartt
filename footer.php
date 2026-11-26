@@ -27,3 +27,37 @@
         &copy; <?= date('Y') ?> <strong>ReeMart Indonesia</strong> &bull; Proyek Pengembangan Sistem Marketplace Re-Commerce.
     </div>
 </footer>
+<!-- BOTTOM NAVIGATION BAR (KHUSUS TAMPILAN MOBILE HP) -->
+<nav class="mobile-bottom-nav">
+    <a href="index.php" class="bottom-nav-item <?= basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '' ?>">
+        <span>🏠</span>
+        <small>Beranda</small>
+    </a>
+    <?php if (isset($_SESSION['user_id'])) : ?>
+        <a href="wishlist.php" class="bottom-nav-item <?= basename($_SERVER['PHP_SELF']) == 'wishlist.php' ? 'active' : '' ?>">
+            <span>❤️</span>
+            <small>Wishlist</small>
+        </a>
+        <a href="jual.php" class="bottom-nav-item sell-highlight">
+            <span>➕</span>
+            <small>Jual</small>
+        </a>
+        <a href="chat.php" class="bottom-nav-item <?= basename($_SERVER['PHP_SELF']) == 'chat.php' ? 'active' : '' ?>">
+            <span>💬</span>
+            <small>Chat</small>
+        </a>
+        <a href="pembeli.php" class="bottom-nav-item <?= in_array(basename($_SERVER['PHP_SELF']), ['pembeli.php', 'penjual.php', 'profil.php']) ? 'active' : '' ?>">
+            <span>👤</span>
+            <small>Akun</small>
+        </a>
+    <?php else : ?>
+        <a href="login.php" class="bottom-nav-item">
+            <span>🔑</span>
+            <small>Masuk</small>
+        </a>
+        <a href="register.php" class="bottom-nav-item">
+            <span>📝</span>
+            <small>Daftar</small>
+        </a>
+    <?php endif; ?>
+</nav>
